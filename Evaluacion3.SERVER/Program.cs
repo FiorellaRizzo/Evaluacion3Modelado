@@ -1,35 +1,36 @@
 using Evaluacion3.BD.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
-//Configuracion de los servicios en el constructor de la apliacion
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<Context>(op => op.UseSqlServer("name=conn"));
+    //Configuracion de los servicios en el constructor de la apliacion
+    var builder = WebApplication.CreateBuilder(args);
 
 
 
-//Construccion de la aplicacion
-var app = builder.Build();
+    // Add services to the container.
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 
-app.UseHttpsRedirection();
+    builder.Services.AddDbContext<Context>(op => op.UseSqlServer("name=conn"));
 
-app.UseAuthorization();
+    var app = builder.Build();
 
-app.MapControllers();
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 
-app.Run();
+    app.UseHttpsRedirection();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.Run();
+
+
